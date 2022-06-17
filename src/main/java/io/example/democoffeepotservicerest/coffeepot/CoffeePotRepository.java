@@ -1,5 +1,9 @@
 package io.example.democoffeepotservicerest.coffeepot;
 
-public interface CoffeePotRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CoffeePotRepository extends JpaRepository<CoffeePot, Long> {
 
 }
