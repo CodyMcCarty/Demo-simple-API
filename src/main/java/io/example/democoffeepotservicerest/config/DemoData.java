@@ -37,7 +37,7 @@ public class DemoData implements CommandLineRunner {
       String brand = coffeePotBrands[new Random().nextInt(coffeePotBrands.length)];
       LocalDate releaseDate = genDate(1995, 2022);
       String sku = brand.charAt(0) + genString(3) + "-" + genAlphaNum(8);
-      coffeePots.add(new CoffeePot(brand, sku, releaseDate, 5));
+      coffeePots.add(new CoffeePot(brand, sku, releaseDate));
     }
     coffeePotRepository.saveAll(coffeePots);
   }

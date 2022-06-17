@@ -1,12 +1,9 @@
 package io.example.democoffeepotservicerest.coffeepot;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*; // This is important in the event we migrate from hibernate.
 
 @Entity
 @Table
@@ -18,24 +15,17 @@ public class CoffeePot {
   private String brand;
   private String sku;
   private LocalDate releaseDate;
+
+  @Transient
   private int age;
 
   public CoffeePot() {
   }
 
-  public CoffeePot(String brand, String sku, LocalDate releaseDate, int age) {
+  public CoffeePot(String brand, String sku, LocalDate releaseDate) {
     this.brand = brand;
     this.sku = sku;
     this.releaseDate = releaseDate;
-    this.age = age;
-  }
-
-  public CoffeePot(Long id, String brand, String sku, LocalDate releaseDate, int age) {
-    this.id = id;
-    this.brand = brand;
-    this.sku = sku;
-    this.releaseDate = releaseDate;
-    this.age = age;
   }
 
   public Long getId() {
@@ -71,7 +61,7 @@ public class CoffeePot {
   }
 
   public int getAge() {
-    return age;
+    return Period.between(this.releaseDate, LocalDate.now()).getYears();
   }
 
   public void setAge(int age) {
