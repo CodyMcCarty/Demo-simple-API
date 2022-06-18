@@ -25,8 +25,8 @@ public class CoffeePotServiceImpl implements CoffeePotService {
   @Override
   public List<CoffeePot> getCoffeePots(CoffeePot coffeePot) {
     try {
-    return coffeePotRepository.findAll(
-        Example.of(coffeePot, ExampleMatcher.matching().withIgnoreCase()));
+      return coffeePotRepository.findAll(
+          Example.of(coffeePot, ExampleMatcher.matching().withIgnoreCase()));
     } catch (Exception e) {
       e.printStackTrace();
       throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, "Server is not ready");
@@ -36,8 +36,10 @@ public class CoffeePotServiceImpl implements CoffeePotService {
 
   @Override
   public CoffeePot getCoffeePotById(Long potId) {
-    return coffeePotRepository.findById(potId).orElseThrow(
-        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Coffee pot not found"));
+    return coffeePotRepository
+        .findById(potId)
+        .orElseThrow(
+            () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Coffee pot not found"));
   }
 
   @Override
@@ -62,13 +64,16 @@ public class CoffeePotServiceImpl implements CoffeePotService {
   @Transactional
   public CoffeePot updateCoffeePot(CoffeePot newPot, Long potId) {
     if (!newPot.getId().equals(potId)) {
-      throw new ResponseStatusException(HttpStatus.CONFLICT,
+      throw new ResponseStatusException(
+          HttpStatus.CONFLICT,
           "Path id " + potId + " doesn't match request body id " + newPot.getId());
-          }
+    }
     CoffeePot prevPot =
         coffeePotRepository
             .findById(newPot.getId())
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "CoffeePot does not exist"));
+            .orElseThrow(
+                () ->
+                    new ResponseStatusException(HttpStatus.NOT_FOUND, "CoffeePot does not exist"));
 
     String newBrand = newPot.getBrand();
     String newSku = newPot.getSku();

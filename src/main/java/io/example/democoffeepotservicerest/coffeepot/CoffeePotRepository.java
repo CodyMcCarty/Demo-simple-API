@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CoffeePotRepository extends JpaRepository<CoffeePot, Long> {
 
-//  Same as @Query("SELECT c FROM CoffeePot WHERE c.sku = ?1")
+  //  Same as @Query("SELECT c FROM CoffeePot WHERE c.sku = ?1")
   Optional<CoffeePot> findCoffeePotBySku(String sku);
 
   Boolean existsCoffeePotBySku(String sku);

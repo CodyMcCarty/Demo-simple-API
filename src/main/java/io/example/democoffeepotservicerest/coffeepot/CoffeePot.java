@@ -3,7 +3,6 @@ package io.example.democoffeepotservicerest.coffeepot;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,14 +24,14 @@ public class CoffeePot {
   @NotBlank(message = "Brand is required")
   private String brand;
 
-//  @Column(unique = true)
+  //  @Column(unique = true)
   @NotNull(message = "Sku cannot be null")
   @Pattern(
       message = "Sku must match the pattern XXXX-XXXXXXXX alphanumeric",
       regexp = "^[A-Z0-9]{4}-[A-Z0-9]{8}$")
   private String sku;
 
-//  @NotBlank(message = "Release date is required")
+  //  @NotBlank(message = "Release date is required")
 
   @NotNull(message = "Release is required")
   private LocalDate releaseDate;

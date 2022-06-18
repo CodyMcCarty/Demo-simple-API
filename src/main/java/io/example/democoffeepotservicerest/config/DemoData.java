@@ -15,8 +15,7 @@ import org.springframework.stereotype.Component;
 public class DemoData implements CommandLineRunner {
   int NUM_OF_COFFEEPOTS = 7_500;
 
-  @Autowired
-  private CoffeePotRepository coffeePotRepository;
+  @Autowired private CoffeePotRepository coffeePotRepository;
 
   @Override
   public void run(String... strings) {
@@ -38,7 +37,7 @@ public class DemoData implements CommandLineRunner {
       LocalDate releaseDate = genDate(1995, 2022);
       String sku = brand.charAt(0) + genString(3) + "-" + genAlphaNum(8);
       if (i == 2) sku = "CHAU-7AJZA69G";
-      while(coffeePotRepository.existsCoffeePotBySku(sku)) {
+      while (coffeePotRepository.existsCoffeePotBySku(sku)) {
         sku = brand.charAt(0) + genString(3) + "-" + genAlphaNum(8);
       }
       coffeePots.add(new CoffeePot(brand, sku, releaseDate));
@@ -46,8 +45,21 @@ public class DemoData implements CommandLineRunner {
     coffeePotRepository.saveAll(coffeePots); // Note this skips validation in business logic
   }
 
-  private String[] coffeePotBrands = {"Breville", "Bonavita", "Cuisinart", "Technivorm", "OXO",
-      "Cafe", "Ninja", "Hamilton Beach", "Mr. Coffee", "Keurig", "Mainstays", "Toastmaster", "Crux"};
+  private String[] coffeePotBrands = {
+    "Breville",
+    "Bonavita",
+    "Cuisinart",
+    "Technivorm",
+    "OXO",
+    "Cafe",
+    "Ninja",
+    "Hamilton Beach",
+    "Mr. Coffee",
+    "Keurig",
+    "Mainstays",
+    "Toastmaster",
+    "Crux"
+  };
 
   private LocalDate genDate(int startYear, int endYear) {
     long startDay = LocalDate.of(startYear, 1, 1).toEpochDay();
@@ -59,7 +71,8 @@ public class DemoData implements CommandLineRunner {
   private String genAlphaNum(int stringLength) {
     int zero = 48;
     int z = 122;
-    return new Random().ints(zero, z)
+    return new Random()
+        .ints(zero, z)
         .filter((i) -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
         .limit(stringLength)
         .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
@@ -70,7 +83,8 @@ public class DemoData implements CommandLineRunner {
   private String genString(int stringLength) {
     int a = 97;
     int z = 122;
-    return new Random().ints(a,z + 1)
+    return new Random()
+        .ints(a, z + 1)
         .limit(stringLength)
         .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
         .toString()
