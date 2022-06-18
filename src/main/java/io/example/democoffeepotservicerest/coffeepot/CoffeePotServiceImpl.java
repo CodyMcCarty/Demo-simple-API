@@ -22,8 +22,20 @@ public class CoffeePotServiceImpl implements CoffeePotService{
 
   @Override
   public CoffeePot addNewCoffeePot(CoffeePot coffeePot) {
-    coffeePotRepository.findCoffeePotsBySku(coffeePot.getSku());
+    Optional<CoffeePot> coffeePotBySku = coffeePotRepository.findCoffeePotsBySku(
+        coffeePot.getSku());
+    if (coffeePotBySku.isPresent()) {
+      throw new IllegalStateException("Sku taken");
+    }
     return coffeePotRepository.save(coffeePot);
+  }
+
+  @Override
+  public void deleteCoffeePot(Long potId) {
+    coffeePotRepository
+            .findById(potId)
+            .orElseThrow(() -> new IllegalStateException("CoffeePot does not exit"));
+    coffeePotRepository.deleteById(potId);
   }
 
   /*

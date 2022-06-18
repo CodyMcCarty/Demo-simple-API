@@ -18,4 +18,10 @@ public interface CoffeePotService {
    * @return the added coffee pot
    */
   CoffeePot addNewCoffeePot(CoffeePot coffeePot);
+
+  /**
+   * Deletes a coffee pot from the repository
+   * @param potId the Id of the coffee pot to delete
+   */
+  public void deleteCoffeePot(Long potId);
 }

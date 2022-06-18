@@ -36,10 +36,12 @@ public class DemoData implements CommandLineRunner {
     for (int i = 0; i < howMany; i++) {
       String brand = coffeePotBrands[new Random().nextInt(coffeePotBrands.length)];
       LocalDate releaseDate = genDate(1995, 2022);
-      String sku = brand.charAt(0) + genString(3) + "-" + genAlphaNum(8);
+      //      String sku = brand.charAt(0) + genString(3) + "-" + genAlphaNum(8);
+      String sku = "asdf";
+      if (i == howMany) sku = "sdfg";
       coffeePots.add(new CoffeePot(brand, sku, releaseDate));
     }
-    coffeePotRepository.saveAll(coffeePots);
+    coffeePotRepository.saveAll(coffeePots); // Note this skips validation in business logic
   }
 
   private String[] coffeePotBrands = {"Breville", "Bonavita", "Cuisinart", "Technivorm", "OXO",
