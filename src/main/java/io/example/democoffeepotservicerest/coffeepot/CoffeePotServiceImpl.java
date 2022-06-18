@@ -6,6 +6,8 @@ import java.util.Objects;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,7 +22,7 @@ public class CoffeePotServiceImpl implements CoffeePotService {
 
   @Override
   public List<CoffeePot> getCoffeePots(CoffeePot coffeePot) {
-    return coffeePotRepository.findAll(); // TODO make example of
+    return coffeePotRepository.findAll(Example.of(coffeePot, ExampleMatcher.matchingAny().withIgnoreCase()));
   }
 
   @Override

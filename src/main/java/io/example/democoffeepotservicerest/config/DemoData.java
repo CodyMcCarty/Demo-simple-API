@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DemoData implements CommandLineRunner {
-  int NUM_OF_COFFEEPOTS = 75;
+  int NUM_OF_COFFEEPOTS = 7_500;
 
   @Autowired
   private CoffeePotRepository coffeePotRepository;
@@ -37,7 +37,9 @@ public class DemoData implements CommandLineRunner {
       String brand = coffeePotBrands[new Random().nextInt(coffeePotBrands.length)];
       LocalDate releaseDate = genDate(1995, 2022);
       String sku = brand.charAt(0) + genString(3) + "-" + genAlphaNum(8);
-      if (i == howMany) sku = "sdfg";
+      while(coffeePotRepository.existsCoffeePotBySku(sku)) {
+        sku = brand.charAt(0) + genString(3) + "-" + genAlphaNum(8);
+      }
       coffeePots.add(new CoffeePot(brand, sku, releaseDate));
     }
     coffeePotRepository.saveAll(coffeePots); // Note this skips validation in business logic
