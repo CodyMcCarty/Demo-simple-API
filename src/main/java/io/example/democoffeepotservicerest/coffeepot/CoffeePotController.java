@@ -2,7 +2,11 @@ package io.example.democoffeepotservicerest.coffeepot;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,8 +22,12 @@ public class CoffeePotController {
   }
 
   @GetMapping
-  public List<CoffeePot> getAllCoffeePots(CoffeePot coffeePot) {
-    return coffeePotService.getAllCoffeePots(coffeePot);
+  public ResponseEntity<List<CoffeePot>> getCoffeePots(CoffeePot coffeePot) {
+    return ResponseEntity.ok(coffeePotService.getCoffeePots(coffeePot));
   }
 
+  @PostMapping
+  public ResponseEntity<CoffeePot> addNewCoffeePot(@RequestBody CoffeePot coffeePot) {
+    return new ResponseEntity<>(coffeePotService.addNewCoffeePot(coffeePot), HttpStatus.CREATED);
+  }
 }
