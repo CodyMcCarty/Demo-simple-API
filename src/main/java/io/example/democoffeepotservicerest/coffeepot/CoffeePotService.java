@@ -23,5 +23,12 @@ public interface CoffeePotService {
    * Deletes a coffee pot from the repository
    * @param potId the Id of the coffee pot to delete
    */
-  public void deleteCoffeePot(Long potId);
+  void deleteCoffeePot(Long potId);
+
+  /**
+   * updates the coffee pot infor
+   * @param coffeePot the updated info
+   * @return the updated coffee pot
+   */
+  CoffeePot updateCoffeePot(CoffeePot coffeePot);
 }

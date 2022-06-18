@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +29,7 @@ public class CoffeePotController {
     return ResponseEntity.ok(coffeePotService.getCoffeePots(coffeePot));
   }
 
-  @PostMapping
+  @PostMapping()
   public ResponseEntity<CoffeePot> addNewCoffeePot(@RequestBody CoffeePot coffeePot) {
     return new ResponseEntity<>(coffeePotService.addNewCoffeePot(coffeePot), HttpStatus.CREATED);
   }
@@ -39,4 +40,13 @@ public class CoffeePotController {
     return ResponseEntity.noContent().build();
   }
 
+  @PutMapping("/{potId}")
+  public ResponseEntity<CoffeePot> updateCoffeePot(@RequestBody CoffeePot coffeePot,
+      @PathVariable final Long potId) {
+    if (potId != coffeePot.getId()) {
+      throw new IllegalStateException("Path variable doesn't match " + "request body id");
+    }
+    return new ResponseEntity<>(coffeePotService.updateCoffeePot(coffeePot), HttpStatus.OK);
+  }
 }
+
