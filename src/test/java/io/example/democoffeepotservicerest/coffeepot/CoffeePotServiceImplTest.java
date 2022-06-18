@@ -29,21 +29,17 @@ import org.springframework.web.server.ResponseStatusException;
 @ExtendWith(SpringExtension.class)
 class CoffeePotServiceImplTest {
 
-  @MockBean
-  private CoffeePotRepository coffeePotRepository;
+  @MockBean private CoffeePotRepository coffeePotRepository;
 
-  @Autowired
-  private CoffeePotServiceImpl coffeePotServiceImpl;
+  @Autowired private CoffeePotServiceImpl coffeePotServiceImpl;
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#getCoffeePots(CoffeePot)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#getCoffeePots(CoffeePot)} */
   @Test
   void testGetCoffeePots() {
     // Arrange
     ArrayList<CoffeePot> coffeePotList = new ArrayList<>();
     when(this.coffeePotRepository.findAll(
-        (org.springframework.data.domain.Example<CoffeePot>) any()))
+            (org.springframework.data.domain.Example<CoffeePot>) any()))
         .thenReturn(coffeePotList);
 
     CoffeePot coffeePot = new CoffeePot();
@@ -59,18 +55,16 @@ class CoffeePotServiceImplTest {
     // Assert
     assertSame(coffeePotList, actualCoffeePots);
     assertTrue(actualCoffeePots.isEmpty());
-    verify(this.coffeePotRepository).findAll(
-        (org.springframework.data.domain.Example<CoffeePot>) any());
+    verify(this.coffeePotRepository)
+        .findAll((org.springframework.data.domain.Example<CoffeePot>) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#getCoffeePots(CoffeePot)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#getCoffeePots(CoffeePot)} */
   @Test
   void testGetCoffeePots2() {
     // Arrange
     when(this.coffeePotRepository.findAll(
-        (org.springframework.data.domain.Example<CoffeePot>) any()))
+            (org.springframework.data.domain.Example<CoffeePot>) any()))
         .thenThrow(new ResponseStatusException(HttpStatus.CONTINUE));
 
     CoffeePot coffeePot = new CoffeePot();
@@ -81,15 +75,13 @@ class CoffeePotServiceImplTest {
     coffeePot.setSku("Sku");
 
     // Act and Assert
-    assertThrows(ResponseStatusException.class,
-        () -> this.coffeePotServiceImpl.getCoffeePots(coffeePot));
-    verify(this.coffeePotRepository).findAll(
-        (org.springframework.data.domain.Example<CoffeePot>) any());
+    assertThrows(
+        ResponseStatusException.class, () -> this.coffeePotServiceImpl.getCoffeePots(coffeePot));
+    verify(this.coffeePotRepository)
+        .findAll((org.springframework.data.domain.Example<CoffeePot>) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#getCoffeePotById(Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#getCoffeePotById(Long)} */
   @Test
   void testGetCoffeePotById() {
     // Arrange
@@ -107,38 +99,32 @@ class CoffeePotServiceImplTest {
     verify(this.coffeePotRepository).findById((Long) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#getCoffeePotById(Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#getCoffeePotById(Long)} */
   @Test
   void testGetCoffeePotById2() {
     // Arrange
     when(this.coffeePotRepository.findById((Long) any())).thenReturn(Optional.empty());
 
     // Act and Assert
-    assertThrows(ResponseStatusException.class,
-        () -> this.coffeePotServiceImpl.getCoffeePotById(123L));
+    assertThrows(
+        ResponseStatusException.class, () -> this.coffeePotServiceImpl.getCoffeePotById(123L));
     verify(this.coffeePotRepository).findById((Long) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#getCoffeePotById(Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#getCoffeePotById(Long)} */
   @Test
   void testGetCoffeePotById3() {
     // Arrange
-    when(this.coffeePotRepository.findById((Long) any())).thenThrow(
-        new ResponseStatusException(HttpStatus.CONTINUE));
+    when(this.coffeePotRepository.findById((Long) any()))
+        .thenThrow(new ResponseStatusException(HttpStatus.CONTINUE));
 
     // Act and Assert
-    assertThrows(ResponseStatusException.class,
-        () -> this.coffeePotServiceImpl.getCoffeePotById(123L));
+    assertThrows(
+        ResponseStatusException.class, () -> this.coffeePotServiceImpl.getCoffeePotById(123L));
     verify(this.coffeePotRepository).findById((Long) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#addNewCoffeePot(CoffeePot)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#addNewCoffeePot(CoffeePot)} */
   @Test
   void testAddNewCoffeePot() {
     // Arrange
@@ -167,14 +153,12 @@ class CoffeePotServiceImplTest {
     coffeePot2.setSku("Sku");
 
     // Act and Assert
-    assertThrows(ResponseStatusException.class,
-        () -> this.coffeePotServiceImpl.addNewCoffeePot(coffeePot2));
+    assertThrows(
+        ResponseStatusException.class, () -> this.coffeePotServiceImpl.addNewCoffeePot(coffeePot2));
     verify(this.coffeePotRepository).findCoffeePotBySku((String) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#addNewCoffeePot(CoffeePot)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#addNewCoffeePot(CoffeePot)} */
   @Test
   void testAddNewCoffeePot2() {
     // Arrange
@@ -200,14 +184,12 @@ class CoffeePotServiceImplTest {
     verify(this.coffeePotRepository).findCoffeePotBySku((String) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#addNewCoffeePot(CoffeePot)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#addNewCoffeePot(CoffeePot)} */
   @Test
   void testAddNewCoffeePot3() {
     // Arrange
-    when(this.coffeePotRepository.save((CoffeePot) any())).thenThrow(
-        new ResponseStatusException(HttpStatus.CONTINUE));
+    when(this.coffeePotRepository.save((CoffeePot) any()))
+        .thenThrow(new ResponseStatusException(HttpStatus.CONTINUE));
     when(this.coffeePotRepository.findCoffeePotBySku((String) any()))
         .thenThrow(new ResponseStatusException(HttpStatus.CONTINUE));
 
@@ -219,14 +201,12 @@ class CoffeePotServiceImplTest {
     coffeePot.setSku("Sku");
 
     // Act and Assert
-    assertThrows(ResponseStatusException.class,
-        () -> this.coffeePotServiceImpl.addNewCoffeePot(coffeePot));
+    assertThrows(
+        ResponseStatusException.class, () -> this.coffeePotServiceImpl.addNewCoffeePot(coffeePot));
     verify(this.coffeePotRepository).findCoffeePotBySku((String) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#deleteCoffeePot(Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#deleteCoffeePot(Long)} */
   @Test
   void testDeleteCoffeePot() {
     // Arrange
@@ -248,9 +228,7 @@ class CoffeePotServiceImplTest {
     verify(this.coffeePotRepository).deleteById((Long) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#deleteCoffeePot(Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#deleteCoffeePot(Long)} */
   @Test
   void testDeleteCoffeePot2() {
     // Arrange
@@ -261,20 +239,19 @@ class CoffeePotServiceImplTest {
     coffeePot.setReleaseDate(LocalDate.ofEpochDay(1L));
     coffeePot.setSku("Sku");
     Optional<CoffeePot> ofResult = Optional.of(coffeePot);
-    doThrow(new ResponseStatusException(HttpStatus.CONTINUE)).when(this.coffeePotRepository)
+    doThrow(new ResponseStatusException(HttpStatus.CONTINUE))
+        .when(this.coffeePotRepository)
         .deleteById((Long) any());
     when(this.coffeePotRepository.findById((Long) any())).thenReturn(ofResult);
 
     // Act and Assert
-    assertThrows(ResponseStatusException.class,
-        () -> this.coffeePotServiceImpl.deleteCoffeePot(123L));
+    assertThrows(
+        ResponseStatusException.class, () -> this.coffeePotServiceImpl.deleteCoffeePot(123L));
     verify(this.coffeePotRepository).findById((Long) any());
     verify(this.coffeePotRepository).deleteById((Long) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#deleteCoffeePot(Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#deleteCoffeePot(Long)} */
   @Test
   void testDeleteCoffeePot3() {
     // Arrange
@@ -282,14 +259,12 @@ class CoffeePotServiceImplTest {
     when(this.coffeePotRepository.findById((Long) any())).thenReturn(Optional.empty());
 
     // Act and Assert
-    assertThrows(ResponseStatusException.class,
-        () -> this.coffeePotServiceImpl.deleteCoffeePot(123L));
+    assertThrows(
+        ResponseStatusException.class, () -> this.coffeePotServiceImpl.deleteCoffeePot(123L));
     verify(this.coffeePotRepository).findById((Long) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)} */
   @Test
   void testUpdateCoffeePot() {
     // Arrange
@@ -323,9 +298,7 @@ class CoffeePotServiceImplTest {
     verify(this.coffeePotRepository).findById((Long) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)} */
   @Test
   void testUpdateCoffeePot2() {
     // Arrange
@@ -336,8 +309,8 @@ class CoffeePotServiceImplTest {
     coffeePot.setReleaseDate(LocalDate.ofEpochDay(1L));
     coffeePot.setSku("Sku");
     Optional<CoffeePot> ofResult = Optional.of(coffeePot);
-    when(this.coffeePotRepository.save((CoffeePot) any())).thenThrow(
-        new ResponseStatusException(HttpStatus.CONTINUE));
+    when(this.coffeePotRepository.save((CoffeePot) any()))
+        .thenThrow(new ResponseStatusException(HttpStatus.CONTINUE));
     when(this.coffeePotRepository.findById((Long) any())).thenReturn(ofResult);
 
     CoffeePot coffeePot1 = new CoffeePot();
@@ -348,15 +321,14 @@ class CoffeePotServiceImplTest {
     coffeePot1.setSku("Sku");
 
     // Act and Assert
-    assertThrows(ResponseStatusException.class,
+    assertThrows(
+        ResponseStatusException.class,
         () -> this.coffeePotServiceImpl.updateCoffeePot(coffeePot1, 123L));
     verify(this.coffeePotRepository).save((CoffeePot) any());
     verify(this.coffeePotRepository).findById((Long) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)} */
   @Test
   void testUpdateCoffeePot3() {
     // Arrange
@@ -394,7 +366,8 @@ class CoffeePotServiceImplTest {
     coffeePot2.setSku("Sku");
 
     // Act and Assert
-    assertThrows(ResponseStatusException.class,
+    assertThrows(
+        ResponseStatusException.class,
         () -> this.coffeePotServiceImpl.updateCoffeePot(coffeePot2, 123L));
     verify(this.coffeePotRepository).findById((Long) any());
     verify(coffeePot).getBrand();
@@ -407,9 +380,7 @@ class CoffeePotServiceImplTest {
     verify(coffeePot).setSku((String) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)} */
   @Test
   void testUpdateCoffeePot4() {
     // Arrange
@@ -460,9 +431,7 @@ class CoffeePotServiceImplTest {
     verify(coffeePot).setSku((String) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)} */
   @Test
   void testUpdateCoffeePot5() {
     // Arrange
@@ -513,9 +482,7 @@ class CoffeePotServiceImplTest {
     verify(coffeePot).setSku((String) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)} */
   @Test
   void testUpdateCoffeePot6() {
     // Arrange
@@ -553,7 +520,8 @@ class CoffeePotServiceImplTest {
     coffeePot2.setSku("Sku");
 
     // Act and Assert
-    assertThrows(ResponseStatusException.class,
+    assertThrows(
+        ResponseStatusException.class,
         () -> this.coffeePotServiceImpl.updateCoffeePot(coffeePot2, 123L));
     verify(this.coffeePotRepository).existsCoffeePotBySku((String) any());
     verify(this.coffeePotRepository).findById((Long) any());
@@ -566,9 +534,7 @@ class CoffeePotServiceImplTest {
     verify(coffeePot).setSku((String) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)} */
   @Test
   void testUpdateCoffeePot7() {
     // Arrange
@@ -604,7 +570,8 @@ class CoffeePotServiceImplTest {
     coffeePot2.setSku("Sku");
 
     // Act and Assert
-    assertThrows(ResponseStatusException.class,
+    assertThrows(
+        ResponseStatusException.class,
         () -> this.coffeePotServiceImpl.updateCoffeePot(coffeePot2, 123L));
     verify(this.coffeePotRepository).findById((Long) any());
     verify(coffeePot1).setAge(anyInt());
@@ -614,9 +581,7 @@ class CoffeePotServiceImplTest {
     verify(coffeePot1).setSku((String) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)} */
   @Test
   void testUpdateCoffeePot8() {
     // Arrange
@@ -662,7 +627,8 @@ class CoffeePotServiceImplTest {
     coffeePot2.setSku("Sku");
 
     // Act and Assert
-    assertThrows(ResponseStatusException.class,
+    assertThrows(
+        ResponseStatusException.class,
         () -> this.coffeePotServiceImpl.updateCoffeePot(coffeePot2, 123L));
     verify(this.coffeePotRepository).findById((Long) any());
     verify(coffeePot).setAge(anyInt());
@@ -679,9 +645,7 @@ class CoffeePotServiceImplTest {
     verify(coffeePot2).setSku((String) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)} */
   @Test
   void testUpdateCoffeePot9() {
     // Arrange
@@ -748,9 +712,7 @@ class CoffeePotServiceImplTest {
     verify(coffeePot2).setSku((String) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)} */
   @Test
   void testUpdateCoffeePot10() {
     // Arrange
@@ -817,9 +779,7 @@ class CoffeePotServiceImplTest {
     verify(coffeePot2).setSku((String) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)} */
   @Test
   void testUpdateCoffeePot11() {
     // Arrange
@@ -886,9 +846,7 @@ class CoffeePotServiceImplTest {
     verify(coffeePot2).setSku((String) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)} */
   @Test
   void testUpdateCoffeePot12() {
     // Arrange
@@ -955,9 +913,7 @@ class CoffeePotServiceImplTest {
     verify(coffeePot2).setSku((String) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)}
-   */
+  /** Method under test: {@link CoffeePotServiceImpl#updateCoffeePot(CoffeePot, Long)} */
   @Test
   void testUpdateCoffeePot13() {
     // Arrange
@@ -1003,7 +959,8 @@ class CoffeePotServiceImplTest {
     coffeePot2.setSku("Sku");
 
     // Act and Assert
-    assertThrows(ResponseStatusException.class,
+    assertThrows(
+        ResponseStatusException.class,
         () -> this.coffeePotServiceImpl.updateCoffeePot(coffeePot2, 123L));
     verify(coffeePot).setAge(anyInt());
     verify(coffeePot).setBrand((String) any());
@@ -1018,4 +975,3 @@ class CoffeePotServiceImplTest {
     verify(coffeePot2).setSku((String) any());
   }
 }
-

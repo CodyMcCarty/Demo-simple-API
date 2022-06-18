@@ -31,15 +31,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 @ExtendWith(SpringExtension.class)
 class CoffeePotControllerTest {
 
-  @Autowired
-  private CoffeePotController coffeePotController;
+  @Autowired private CoffeePotController coffeePotController;
 
-  @MockBean
-  private CoffeePotService coffeePotService;
+  @MockBean private CoffeePotService coffeePotService;
 
-  /**
-   * Method under test: {@link CoffeePotController#addNewCoffeePot(CoffeePot)}
-   */
+  /** Method under test: {@link CoffeePotController#addNewCoffeePot(CoffeePot)} */
   @Test
   @Disabled("TODO: Complete this test")
   void testAddNewCoffeePot() {
@@ -55,8 +51,10 @@ class CoffeePotControllerTest {
     //   Reason: No inputs found that don't throw a trivial exception.
     //   The method under test threw
     //   org.springframework.web.server.ResponseStatusException: 409 CONFLICT "Sku Taken"
-    //       at io.example.democoffeepotservicerest.coffeepot.CoffeePotServiceImpl.addNewCoffeePot(CoffeePotServiceImpl.java:49)
-    //       at io.example.democoffeepotservicerest.coffeepot.CoffeePotController.addNewCoffeePot(CoffeePotController.java:40)
+    //       at
+    // io.example.democoffeepotservicerest.coffeepot.CoffeePotServiceImpl.addNewCoffeePot(CoffeePotServiceImpl.java:49)
+    //       at
+    // io.example.democoffeepotservicerest.coffeepot.CoffeePotController.addNewCoffeePot(CoffeePotController.java:40)
     //   In order to prevent addNewCoffeePot(CoffeePot)
     //   from throwing ResponseStatusException, add constructors or factory
     //   methods that make it easier to construct fully initialized objects used in
@@ -80,8 +78,8 @@ class CoffeePotControllerTest {
     CoffeePotRepository coffeePotRepository = mock(CoffeePotRepository.class);
     when(coffeePotRepository.save((CoffeePot) any())).thenReturn(coffeePot);
     when(coffeePotRepository.findCoffeePotBySku((String) any())).thenReturn(ofResult);
-    CoffeePotController coffeePotController = new CoffeePotController(
-        new CoffeePotServiceImpl(coffeePotRepository));
+    CoffeePotController coffeePotController =
+        new CoffeePotController(new CoffeePotServiceImpl(coffeePotRepository));
 
     CoffeePot coffeePot2 = new CoffeePot();
     coffeePot2.setAge(1);
@@ -94,9 +92,7 @@ class CoffeePotControllerTest {
     coffeePotController.addNewCoffeePot(coffeePot2);
   }
 
-  /**
-   * Method under test: {@link CoffeePotController#addNewCoffeePot(CoffeePot)}
-   */
+  /** Method under test: {@link CoffeePotController#addNewCoffeePot(CoffeePot)} */
   @Test
   void testAddNewCoffeePot2() {
     //   Unable to write a Spring test, so wrote a non-Spring test instead.
@@ -116,8 +112,8 @@ class CoffeePotControllerTest {
     CoffeePotRepository coffeePotRepository = mock(CoffeePotRepository.class);
     when(coffeePotRepository.save((CoffeePot) any())).thenReturn(coffeePot);
     when(coffeePotRepository.findCoffeePotBySku((String) any())).thenReturn(Optional.empty());
-    CoffeePotController coffeePotController = new CoffeePotController(
-        new CoffeePotServiceImpl(coffeePotRepository));
+    CoffeePotController coffeePotController =
+        new CoffeePotController(new CoffeePotServiceImpl(coffeePotRepository));
 
     CoffeePot coffeePot1 = new CoffeePot();
     coffeePot1.setAge(1);
@@ -127,8 +123,8 @@ class CoffeePotControllerTest {
     coffeePot1.setSku("Sku");
 
     // Act
-    ResponseEntity<CoffeePot> actualAddNewCoffeePotResult = coffeePotController.addNewCoffeePot(
-        coffeePot1);
+    ResponseEntity<CoffeePot> actualAddNewCoffeePotResult =
+        coffeePotController.addNewCoffeePot(coffeePot1);
 
     // Assert
     assertEquals(coffeePot1, actualAddNewCoffeePotResult.getBody());
@@ -138,9 +134,7 @@ class CoffeePotControllerTest {
     verify(coffeePotRepository).findCoffeePotBySku((String) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotController#updateCoffeePot(CoffeePot, Long)}
-   */
+  /** Method under test: {@link CoffeePotController#updateCoffeePot(CoffeePot, Long)} */
   @Test
   @Disabled("TODO: Complete this test")
   void testUpdateCoffeePot() {
@@ -155,17 +149,20 @@ class CoffeePotControllerTest {
     // TODO: Complete this test.
     //   Reason: No inputs found that don't throw a trivial exception.
     //   Method under test threw
-    //   org.springframework.web.server.ResponseStatusException: 409 CONFLICT "Path id 1 doesn't match request body id 123"
-    //       at io.example.democoffeepotservicerest.coffeepot.CoffeePotServiceImpl.updateCoffeePot(CoffeePotServiceImpl.java:69)
-    //       at io.example.democoffeepotservicerest.coffeepot.CoffeePotController.updateCoffeePot(CoffeePotController.java:52)
+    //   org.springframework.web.server.ResponseStatusException: 409 CONFLICT "Path id 1 doesn't
+    // match request body id 123"
+    //       at
+    // io.example.democoffeepotservicerest.coffeepot.CoffeePotServiceImpl.updateCoffeePot(CoffeePotServiceImpl.java:69)
+    //       at
+    // io.example.democoffeepotservicerest.coffeepot.CoffeePotController.updateCoffeePot(CoffeePotController.java:52)
     //   In order to prevent updateCoffeePot(CoffeePot, Long)
     //   from throwing ResponseStatusException, add constructors or factory
     //   methods that make it easier to construct fully initialized objects used in
     //   updateCoffeePot(CoffeePot, Long).
 
     // Arrange
-    CoffeePotController coffeePotController = new CoffeePotController(
-        new CoffeePotServiceImpl(mock(CoffeePotRepository.class)));
+    CoffeePotController coffeePotController =
+        new CoffeePotController(new CoffeePotServiceImpl(mock(CoffeePotRepository.class)));
 
     CoffeePot coffeePot = new CoffeePot();
     coffeePot.setAge(1);
@@ -178,9 +175,7 @@ class CoffeePotControllerTest {
     coffeePotController.updateCoffeePot(coffeePot, 1L);
   }
 
-  /**
-   * Method under test: {@link CoffeePotController#updateCoffeePot(CoffeePot, Long)}
-   */
+  /** Method under test: {@link CoffeePotController#updateCoffeePot(CoffeePot, Long)} */
   @Test
   void testUpdateCoffeePot2() {
     //   Unable to write a Spring test,
@@ -246,8 +241,8 @@ class CoffeePotControllerTest {
     coffeePot4.setSku("Sku");
 
     // Act
-    ResponseEntity<CoffeePot> actualUpdateCoffeePotResult = coffeePotController.updateCoffeePot(
-        coffeePot4, 123L);
+    ResponseEntity<CoffeePot> actualUpdateCoffeePotResult =
+        coffeePotController.updateCoffeePot(coffeePot4, 123L);
 
     // Assert
     assertTrue(actualUpdateCoffeePotResult.hasBody());
@@ -268,55 +263,45 @@ class CoffeePotControllerTest {
     verify(coffeePot).setSku((String) any());
   }
 
-  /**
-   * Method under test: {@link CoffeePotController#deleteCoffeePot(Long)}
-   */
+  /** Method under test: {@link CoffeePotController#deleteCoffeePot(Long)} */
   @Test
   void testDeleteCoffeePot() throws Exception {
     // Arrange
     MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/{potId}", 123L);
 
     // Act
-    ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(this.coffeePotController)
-        .build()
-        .perform(requestBuilder);
+    ResultActions actualPerformResult =
+        MockMvcBuilders.standaloneSetup(this.coffeePotController).build().perform(requestBuilder);
 
     // Assert
     actualPerformResult.andExpect(MockMvcResultMatchers.status().isNotFound());
   }
 
-  /**
-   * Method under test: {@link CoffeePotController#getCoffeePotById(Long)}
-   */
+  /** Method under test: {@link CoffeePotController#getCoffeePotById(Long)} */
   @Test
   void testGetCoffeePotById() throws Exception {
     // Arrange
     MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/{potId}", 123L);
 
     // Act
-    ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(this.coffeePotController)
-        .build()
-        .perform(requestBuilder);
+    ResultActions actualPerformResult =
+        MockMvcBuilders.standaloneSetup(this.coffeePotController).build().perform(requestBuilder);
 
     // Assert
     actualPerformResult.andExpect(MockMvcResultMatchers.status().isNotFound());
   }
 
-  /**
-   * Method under test: {@link CoffeePotController#getCoffeePots(CoffeePot)}
-   */
+  /** Method under test: {@link CoffeePotController#getCoffeePots(CoffeePot)} */
   @Test
   void testGetCoffeePots() throws Exception {
     // Arrange
     MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/");
 
     // Act
-    ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(this.coffeePotController)
-        .build()
-        .perform(requestBuilder);
+    ResultActions actualPerformResult =
+        MockMvcBuilders.standaloneSetup(this.coffeePotController).build().perform(requestBuilder);
 
     // Assert
     actualPerformResult.andExpect(MockMvcResultMatchers.status().isNotFound());
   }
 }
-

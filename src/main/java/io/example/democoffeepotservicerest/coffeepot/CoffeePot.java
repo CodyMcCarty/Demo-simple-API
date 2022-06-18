@@ -1,5 +1,7 @@
 package io.example.democoffeepotservicerest.coffeepot;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
@@ -15,27 +17,37 @@ import javax.validation.constraints.Pattern;
 
 @Entity
 @Table
+@ApiModel(description = "Details about coffee pots.  NOTE: Id and age are generated values")
 public class CoffeePot {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @ApiModelProperty(notes = "Unique ID of the coffee pot. Auto generated from the DB")
   private Long id;
 
   @NotBlank(message = "Brand is required")
+  @ApiModelProperty(
+      notes = "The brand name of the coffee pot ie Ninja, Coffee Mate, ect",
+      example = "Ninja")
   private String brand;
 
   @NotNull(message = "Sku cannot be null")
   @Pattern(
       message = "Sku must match the pattern XXXX-XXXXXXXX alphanumeric",
       regexp = "^[A-Z0-9]{4}-[A-Z0-9]{8}$")
+  @ApiModelProperty(
+      notes =
+          "Unique SKU of the coffee pot.  Sku must match the pattern XXXX-XXXXXXXX alphanumeric",
+      example = "CXFV-JY3MWVDU")
   private String sku;
 
-  //  @NotBlank(message = "Release date is required")
-
   @NotNull(message = "Release is required")
+  @ApiModelProperty(notes = "When did the coffee pot come out?", example = "2003-01-30")
   private LocalDate releaseDate;
 
-  @Transient private int age;
+  @ApiModelProperty(notes = "Transient and generated from the API")
+  @Transient
+  private int age;
 
   public CoffeePot() {}
 

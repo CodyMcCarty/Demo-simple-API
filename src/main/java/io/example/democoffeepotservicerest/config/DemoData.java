@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DemoData implements CommandLineRunner {
-  int NUM_OF_COFFEEPOTS = 7_500;
+  int NUM_OF_COFFEEPOTS = 1_500;
 
   @Autowired private CoffeePotRepository coffeePotRepository;
 

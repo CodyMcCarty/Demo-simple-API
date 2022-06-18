@@ -79,14 +79,14 @@ class CoffeePotTest {
     assertEquals("Sku", actualCoffeePot.getSku());
   }
 
-  /**
-   * Method under test: {@link CoffeePot#getAge()}
-   */
+  /** Method under test: {@link CoffeePot#getAge()} */
   @Test
   @Disabled("TODO: Complete this test")
   void testGetAge() {
     // TODO: Complete this test.
-    //   java.lang.NullPointerException: Cannot invoke "java.time.LocalDate.until(java.time.chrono.ChronoLocalDate)" because "startDateInclusive" is null
+    //   java.lang.NullPointerException: Cannot invoke
+    // "java.time.LocalDate.until(java.time.chrono.ChronoLocalDate)" because "startDateInclusive" is
+    // null
     //       at java.time.Period.between(Period.java:389)
     //       at io.example.democoffeepotservicerest.coffeepot.CoffeePot.getAge(CoffeePot.java:81)
     //   In order to prevent getAge()
@@ -98,9 +98,7 @@ class CoffeePotTest {
     (new CoffeePot()).getAge();
   }
 
-  /**
-   * Method under test: {@link CoffeePot#getAge()}
-   */
+  /** Method under test: {@link CoffeePot#getAge()} */
   @Test
   @Disabled("TODO: Complete this test")
   void testGetAge2() {
@@ -122,9 +120,7 @@ class CoffeePotTest {
     coffeePot.getAge();
   }
 
-  /**
-   * Method under test: {@link CoffeePot#equals(Object)}
-   */
+  /** Method under test: {@link CoffeePot#equals(Object)} */
   @Test
   @Disabled("TODO: Complete this test")
   void testEquals7() {
@@ -156,16 +152,15 @@ class CoffeePotTest {
     assertThrows(NullPointerException.class, () -> coffeePot.equals(coffeePot1));
   }
 
-  /**
-   * Method under test: {@link CoffeePot#equals(Object)}
-   */
+  /** Method under test: {@link CoffeePot#equals(Object)} */
   @Test
   @Disabled("TODO: Complete this test")
   void testEquals9() {
     // TODO: Complete this test.
     //   Reason: No inputs found that don't throw a trivial exception.
     //   Method under test threw
-    //   java.lang.NullPointerException: Cannot invoke "java.lang.Long.equals(Object)" because "this.id" is null
+    //   java.lang.NullPointerException: Cannot invoke "java.lang.Long.equals(Object)" because
+    // "this.id" is null
     //       at io.example.democoffeepotservicerest.coffeepot.CoffeePot.equals(CoffeePot.java:116)
     //   In order to prevent equals(Object)
     //   from throwing NullPointerException, add constructors or factory
@@ -191,16 +186,15 @@ class CoffeePotTest {
     assertThrows(NullPointerException.class, () -> coffeePot.equals(coffeePot1));
   }
 
-  /**
-   * Method under test: {@link CoffeePot#equals(Object)}
-   */
+  /** Method under test: {@link CoffeePot#equals(Object)} */
   @Test
   @Disabled("TODO: Complete this test")
   void testEquals11() {
     // TODO: Complete this test.
     //   Reason: No inputs found that don't throw a trivial exception.
     //   The method under test threw
-    //   java.lang.NullPointerException: Cannot invoke "java.time.LocalDate.equals(Object)" because "this.releaseDate" is null
+    //   java.lang.NullPointerException: Cannot invoke "java.time.LocalDate.equals(Object)" because
+    // "this.releaseDate" is null
     //       at io.example.democoffeepotservicerest.coffeepot.CoffeePot.equals(CoffeePot.java:119)
     //   In order to prevent equals(Object)
     //   from throwing NullPointerException, add constructors or factory
@@ -226,9 +220,7 @@ class CoffeePotTest {
     assertThrows(NullPointerException.class, () -> coffeePot.equals(coffeePot1));
   }
 
-  /**
-   * Method under test: {@link CoffeePot#equals(Object)}
-   */
+  /** Method under test: {@link CoffeePot#equals(Object)} */
   @Test
   @Disabled("TODO: Complete this test")
   void testEquals13() {
@@ -261,9 +253,7 @@ class CoffeePotTest {
     assertThrows(NullPointerException.class, () -> coffeePot.equals(coffeePot1));
   }
 
-  /**
-   * Method under test: {@link CoffeePot#equals(Object)}
-   */
+  /** Method under test: {@link CoffeePot#equals(Object)} */
   @Test
   void testEquals() {
     // Arrange
@@ -278,9 +268,7 @@ class CoffeePotTest {
     assertNotEquals(coffeePot, null);
   }
 
-  /**
-   * Method under test: {@link CoffeePot#equals(Object)}
-   */
+  /** Method under test: {@link CoffeePot#equals(Object)} */
   @Test
   void testEquals2() {
     // Arrange
@@ -350,9 +338,7 @@ class CoffeePotTest {
     assertEquals(expectedHashCodeResult, coffeePot1.hashCode());
   }
 
-  /**
-   * Method under test: {@link CoffeePot#equals(Object)}
-   */
+  /** Method under test: {@link CoffeePot#equals(Object)} */
   @Test
   void testEquals5() {
     // Arrange
@@ -374,9 +360,7 @@ class CoffeePotTest {
     assertNotEquals(coffeePot, coffeePot1);
   }
 
-  /**
-   * Method under test: {@link CoffeePot#equals(Object)}
-   */
+  /** Method under test: {@link CoffeePot#equals(Object)} */
   @Test
   void testEquals6() {
     // Arrange
@@ -398,9 +382,7 @@ class CoffeePotTest {
     assertNotEquals(coffeePot, coffeePot1);
   }
 
-  /**
-   * Method under test: {@link CoffeePot#equals(Object)}
-   */
+  /** Method under test: {@link CoffeePot#equals(Object)} */
   @Test
   void testEquals8() {
     // Arrange
@@ -422,9 +404,7 @@ class CoffeePotTest {
     assertNotEquals(coffeePot, coffeePot1);
   }
 
-  /**
-   * Method under test: {@link CoffeePot#equals(Object)}
-   */
+  /** Method under test: {@link CoffeePot#equals(Object)} */
   @Test
   void testEquals10() {
     // Arrange
@@ -446,9 +426,7 @@ class CoffeePotTest {
     assertNotEquals(coffeePot, coffeePot1);
   }
 
-  /**
-   * Method under test: {@link CoffeePot#equals(Object)}
-   */
+  /** Method under test: {@link CoffeePot#equals(Object)} */
   @Test
   void testEquals12() {
     // Arrange
@@ -470,4 +448,3 @@ class CoffeePotTest {
     assertNotEquals(coffeePot, coffeePot1);
   }
 }
-
