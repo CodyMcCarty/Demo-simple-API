@@ -13,6 +13,14 @@ public interface CoffeePotService {
   List<CoffeePot> getCoffeePots(CoffeePot coffeePot);
 
   /**
+   * fetches a coffee pot by Id
+   *
+   * @param potId the coffee pot ID
+   * @return a coffee pot
+   */
+  CoffeePot getCoffeePotById(Long potId);
+
+  /**
    * Persist a coffee pot to the repository
    *
    * @param coffeePot the coffee pot to add
@@ -28,10 +36,11 @@ public interface CoffeePotService {
   void deleteCoffeePot(Long potId);
 
   /**
-   * updates the coffee pot infor
+   * updates the coffee pot info
    *
-   * @param coffeePot the updated info
+   * @param coffeePot the updated info from request body
+   * @param potId the coffee pot id from the path
    * @return the updated coffee pot
    */
-  CoffeePot updateCoffeePot(CoffeePot coffeePot);
+  CoffeePot updateCoffeePot(CoffeePot coffeePot, Long potId);
 }

@@ -37,6 +37,7 @@ public class DemoData implements CommandLineRunner {
       String brand = coffeePotBrands[new Random().nextInt(coffeePotBrands.length)];
       LocalDate releaseDate = genDate(1995, 2022);
       String sku = brand.charAt(0) + genString(3) + "-" + genAlphaNum(8);
+      if (i == 2) sku = "CHAU-7AJZA69G";
       while(coffeePotRepository.existsCoffeePotBySku(sku)) {
         sku = brand.charAt(0) + genString(3) + "-" + genAlphaNum(8);
       }

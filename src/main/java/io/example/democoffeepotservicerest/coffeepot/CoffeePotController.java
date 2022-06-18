@@ -1,6 +1,7 @@
 package io.example.democoffeepotservicerest.coffeepot;
 
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +30,13 @@ public class CoffeePotController {
     return ResponseEntity.ok(coffeePotService.getCoffeePots(coffeePot));
   }
 
+  @GetMapping(path = "{potId}")
+  public ResponseEntity<CoffeePot> getCoffeePotById(@PathVariable("potId") final Long potId) {
+    return new ResponseEntity<>(coffeePotService.getCoffeePotById(potId), HttpStatus.OK);
+  }
+
   @PostMapping()
-  public ResponseEntity<CoffeePot> addNewCoffeePot(@RequestBody CoffeePot coffeePot) {
+  public ResponseEntity<CoffeePot> addNewCoffeePot(@RequestBody @Valid CoffeePot coffeePot) {
     return new ResponseEntity<>(coffeePotService.addNewCoffeePot(coffeePot), HttpStatus.CREATED);
   }
 
@@ -42,10 +48,7 @@ public class CoffeePotController {
 
   @PutMapping("/{potId}")
   public ResponseEntity<CoffeePot> updateCoffeePot(
-      @RequestBody CoffeePot coffeePot, @PathVariable final Long potId) {
-    if (coffeePot.getId() != potId) {
-      throw new IllegalStateException("path id doesn't match request body");
-    }
-    return new ResponseEntity<>(coffeePotService.updateCoffeePot(coffeePot), HttpStatus.OK);
+      @RequestBody @Valid CoffeePot coffeePot, @PathVariable final Long potId) {
+    return new ResponseEntity<>(coffeePotService.updateCoffeePot(coffeePot, potId), HttpStatus.OK);
   }
 }

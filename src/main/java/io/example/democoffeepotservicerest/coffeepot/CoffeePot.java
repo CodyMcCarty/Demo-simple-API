@@ -3,12 +3,16 @@ package io.example.democoffeepotservicerest.coffeepot;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table
@@ -18,8 +22,19 @@ public class CoffeePot {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @NotBlank(message = "Brand is required")
   private String brand;
+
+//  @Column(unique = true)
+  @NotNull(message = "Sku cannot be null")
+  @Pattern(
+      message = "Sku must match the pattern XXXX-XXXXXXXX alphanumeric",
+      regexp = "^[A-Z0-9]{4}-[A-Z0-9]{8}$")
   private String sku;
+
+//  @NotBlank(message = "Release date is required")
+
+  @NotNull(message = "Release is required")
   private LocalDate releaseDate;
 
   @Transient private int age;
