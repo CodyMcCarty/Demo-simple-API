@@ -24,7 +24,6 @@ public class CoffeePot {
   @NotBlank(message = "Brand is required")
   private String brand;
 
-  //  @Column(unique = true)
   @NotNull(message = "Sku cannot be null")
   @Pattern(
       message = "Sku must match the pattern XXXX-XXXXXXXX alphanumeric",
