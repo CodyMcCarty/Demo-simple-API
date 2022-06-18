@@ -3,7 +3,12 @@ package io.example.democoffeepotservicerest.coffeepot;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
-import javax.persistence.*; // This is important in the event we migrate from hibernate.
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table
@@ -12,15 +17,14 @@ public class CoffeePot {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   private String brand;
   private String sku;
   private LocalDate releaseDate;
 
-  @Transient
-  private int age;
+  @Transient private int age;
 
-  public CoffeePot() {
-  }
+  public CoffeePot() {}
 
   public CoffeePot(String brand, String sku, LocalDate releaseDate) {
     this.brand = brand;
@@ -70,13 +74,20 @@ public class CoffeePot {
 
   @Override
   public String toString() {
-    return "CoffeePot{" +
-        "id=" + id +
-        ", brand='" + brand + '\'' +
-        ", sku='" + sku + '\'' +
-        ", releaseDate=" + releaseDate +
-        ", age=" + age +
-        '}';
+    return "CoffeePot{"
+        + "id="
+        + id
+        + ", brand='"
+        + brand
+        + '\''
+        + ", sku='"
+        + sku
+        + '\''
+        + ", releaseDate="
+        + releaseDate
+        + ", age="
+        + age
+        + '}';
   }
 
   @Override
@@ -88,8 +99,11 @@ public class CoffeePot {
       return false;
     }
     CoffeePot coffeePot = (CoffeePot) o;
-    return age == coffeePot.age && id.equals(coffeePot.id) && brand.equals(coffeePot.brand)
-        && sku.equals(coffeePot.sku) && releaseDate.equals(coffeePot.releaseDate);
+    return age == coffeePot.age
+        && id.equals(coffeePot.id)
+        && brand.equals(coffeePot.brand)
+        && sku.equals(coffeePot.sku)
+        && releaseDate.equals(coffeePot.releaseDate);
   }
 
   @Override

@@ -41,12 +41,11 @@ public class CoffeePotController {
   }
 
   @PutMapping("/{potId}")
-  public ResponseEntity<CoffeePot> updateCoffeePot(@RequestBody CoffeePot coffeePot,
-      @PathVariable final Long potId) {
-    if (potId != coffeePot.getId()) {
-      throw new IllegalStateException("Path variable doesn't match " + "request body id");
+  public ResponseEntity<CoffeePot> updateCoffeePot(
+      @RequestBody CoffeePot coffeePot, @PathVariable final Long potId) {
+    if (coffeePot.getId() != potId) {
+      throw new IllegalStateException("path id doesn't match request body");
     }
     return new ResponseEntity<>(coffeePotService.updateCoffeePot(coffeePot), HttpStatus.OK);
   }
 }
-

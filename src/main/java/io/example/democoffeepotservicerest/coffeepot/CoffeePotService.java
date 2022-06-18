@@ -1,12 +1,12 @@
 package io.example.democoffeepotservicerest.coffeepot;
 
-import java.net.URI;
 import java.util.List;
 
 public interface CoffeePotService {
 
   /**
    * Queries the DB for coffee pots
+   *
    * @param coffeePot the example coffee pot
    * @return a list of matching coffee pots
    */
@@ -14,6 +14,7 @@ public interface CoffeePotService {
 
   /**
    * Persist a coffee pot to the repository
+   *
    * @param coffeePot the coffee pot to add
    * @return the added coffee pot
    */
@@ -21,12 +22,14 @@ public interface CoffeePotService {
 
   /**
    * Deletes a coffee pot from the repository
+   *
    * @param potId the Id of the coffee pot to delete
    */
   void deleteCoffeePot(Long potId);
 
   /**
    * updates the coffee pot infor
+   *
    * @param coffeePot the updated info
    * @return the updated coffee pot
    */
